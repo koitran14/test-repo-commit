@@ -1,0 +1,18 @@
+# Keep the image clean: deps are installed inside the image by `npm install`.
+node_modules
+npm-debug.log*
+
+# Never bake secrets or local runtime data into the image layer
+.env
+data/
+*.log
+
+# Local editor / OS junk
+.DS_Store
+.~lock.*#
+.git
+.gitignore
+
+# Docs & local-only helpers (not needed at runtime)
+*.md
+_dashtest.js
