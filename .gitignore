@@ -1,0 +1,18 @@
+node_modules/
+.env
+data/
+*.log
+.DS_Store
+
+# LibreOffice/Office temp lock files
+.~lock.*#
+.env.local
+.env.*.local
+
+# Scratch / temp dev files (khong commit)
+_*.tmp
+_dashtest.js
+*.tmp
+
+# Cowork test marker
+.cowork-test-root

@@ -1,0 +1,67 @@
+# ============================================================
+# Quotation Agent - Cau hinh (business config, editable no rebuild)
+# Secrets KHONG dat o day - dung environment variables (.env)
+# ============================================================
+
+# === Agent identity ===
+agent:
+  name: "Quotation Agent"
+  description: "Nhan email bao gia tu khach hang, trich xuat thong tin, ghi Google Sheet va tra loi xac nhan"
+  port: 3100
+
+# === Skill (behavior) ===
+skill:
+  source: "local"                 # local | drive
+  local_path: "skill/SKILL.md"
+  references_path: "skill/references"
+  reload_interval_minutes: 5
+
+# === Claude model ===
+claude:
+  model: "claude-sonnet-4-6"
+  max_tokens: 8192
+  max_turns: 30
+
+# === Tools ===
+tools:
+  gmail:
+    enabled: true
+    # Agent chay duoi tai khoan OAuth da uy quyen (chinh la hop thu nay).
+    monitored_mailbox: "dangkhoi.tran@pmax.com.vn"
+    # -from:me: KHONG xu ly email do chinh agent gui (tranh vong lap tu tra loi)
+    scan_query: 'subject:"[Quotation]" is:unread -from:me newer_than:1d'
+    check_frequency_minutes: 5
+    mark_as_read_before_processing: true
+    send_gate:
+      max_per_cycle: 2            # BP3: gioi han gui moi cycle
+      max_per_hour: 20
+      max_per_day: 100
+
+  sheets:
+    enabled: true
+    sheets:
+      # THAY REPLACE_WITH_SHEET_ID bang ID Google Sheet cua ban
+      # (lay tu URL: docs.google.com/spreadsheets/d/<SHEET_ID>/edit)
+      quotations: { id: "1BYTTu0_mYqKz9Dz87L0ce_ss2rqwQe1Zt43cl1311Vw", tab: "Quotations" }
+      claim_log:  { id: "1BYTTu0_mYqKz9Dz87L0ce_ss2rqwQe1Zt43cl1311Vw", tab: "ProcessLog" }
+
+# === Email trigger ===
+email_trigger:
+  enabled: true
+  auto_reply: true
+
+# === Dashboard (giao dien web + dang nhap Google) ===
+dashboard:
+  enabled: true
+  allowed_domain: "pmax.com.vn"     # chi email @pmax.com.vn dang nhap duoc
+  allowed_emails: []                # (tuy chon) danh sach email cu the duoc phep, ngoai domain
+
+# === Test mode (BP8) - TAT de chay that (user xac nhan 2026-07-24).
+# Bat lai bang cach doi enabled: true (khong can build lai).
+test_mode:
+  enabled: false
+  email:
+    redirect_to: "dangkhoi.tran@pmax.com.vn"   # moi reply chuyen huong ve day
+    suppress_cc: true
+  sheets:
+    dry_run: false               # da tat: ghi THAT vao Sheet (email van redirect ve ban)
