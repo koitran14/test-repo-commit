@@ -13,3 +13,6 @@ data/
 _*.tmp
 _dashtest.js
 *.tmp
+
+# Cowork test marker
+.cowork-test-root
