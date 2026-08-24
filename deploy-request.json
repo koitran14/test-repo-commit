@@ -1,5 +1,5 @@
 {
-  "request_id": "4fd9c52b-a08a-41de-bf2d-c36bd296ef0a",
+  "request_id": "d0e03b07-9c87-49bd-b621-ed7829f6335e",
   "requested_by": "dangkhoi.tran@pmax.com.vn",
   "mode": "apply",
   "confirmed": true,
@@ -10,8 +10,8 @@
   },
   "github": {
     "api_url": "https://api.github.com",
-    "owner": "REPLACE_WITH_GITHUB_OWNER",
-    "repo": "quotation-agent",
+    "owner": "koitran14",
+    "repo": "test-repo-commit",
     "visibility": "private",
     "description": "Quotation Agent — nhận email [Quotation], trích xuất báo giá, ghi Google Sheet, tự trả lời",
     "default_branch": "main",
