@@ -1,12 +1,20 @@
 {
-  "request_id": "d0e03b07-9c87-49bd-b621-ed7829f6335e",
+  "request_id": "dd43a9c6-e12c-4a1e-8527-154e64c8f9df",
   "requested_by": "dangkhoi.tran@pmax.com.vn",
   "mode": "apply",
   "confirmed": true,
+  "mr_context": {
+    "iid": 2,
+    "url": "https://github.com/koitran14/test-repo-commit/pull/2",
+    "status": "open"
+  },
   "project": {
     "name": "quotation-agent",
     "environment": "staging",
-    "tags": { "team": "backend", "app": "quotation-agent" }
+    "tags": {
+      "team": "backend",
+      "app": "quotation-agent"
+    }
   },
   "github": {
     "api_url": "https://api.github.com",

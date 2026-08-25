@@ -51,18 +51,18 @@ Nhánh: `feature/initial-import` → mở PR vào `main`.
 ---
 
 ## QC Score
-- **Code Quality: 100/100** (chấm lại 2026-07-26 trên trạng thái code hiện tại — điểm ngày 2026-07-24 không tái dùng)
+- **Code Quality: 100/100** (chấm lại 2026-08-25 cho deploy request staging mới — điểm cũ không tái dùng)
   - D1 Startup & Config 10/10 · D2 Tools 15/15 · D3 Agentic loop 15/15 · D4 Error handling 10/10
   - D5 Scheduling & Dedup 10/10 · D6 Logging 10/10 · D7 Security 10/10 · D8 Deployment 10/10
   - D9 Code quality 5/5 · D10 Testing 5/5
-- Chi tiết: `reports/qc-code-quotation-agent-2026-07-26.md`
-- Thay đổi từ lần chấm trước: chỉ `config.yaml` (`test_mode.enabled` → `false`) + thêm `test/load/drive.js` (fixture đo tải, no-PII). Source code `src/` không đổi.
+- Chi tiết: `reports/qc-code-quotation-agent-2026-08-25.md`
+- **Code baseline:** `src/`/`skill/`/`ui/` không đổi kể từ import `df48d66` (`git diff df48d66 HEAD -- src skill ui` = rỗng). Thay đổi lần này chỉ tài liệu + `deploy-request.json` (request_id mới) → điểm code giữ nguyên.
 
-## Test Results
-- [x] Cổng cơ học (`agent_precheck.py`): **PASS** (0 fail, 0 warn) — chạy lại 2026-07-26
-- [x] Kiểm cú pháp: **19/19 file `.js` PASS**
-- [x] Test logic (SendGate cap=2, truncate 50k, retry 429, tính total, explicit total): **8/8 PASS**
-- [ ] End-to-end với API thật: chạy sau khi platform inject key (test_mode hiện **tắt** — xem lưu ý)
+## Test Results (chạy lại 2026-08-25)
+- [x] Cổng cơ học (deterministic gate): **PASS** — `.env` không track, `.gitignore` chặn `.env`, 0 secret hardcode, Dockerfile + `/health` + `/ready` có mặt, `config.yaml` valid.
+- [x] Kiểm cú pháp: **`node --check` 18/18 file `src/` PASS** (+ `scripts/get-refresh-token.js`, `test/load/drive.js`).
+- [~] Boot + health smoke: **không chạy được trong phiên này** — `require('googleapis')` treo khi đọc `node_modules` qua mount thiết bị (giới hạn hạ tầng, không phải lỗi code). `/health` xác nhận non-blocking qua đọc mã `src/server.js:20`.
+- [ ] End-to-end với API thật (email→Sheet→reply): chạy sau khi platform inject key. Không chạy lại ở đây vì `src/` không đổi + sẽ gửi email/ghi Sheet thật; bằng chứng pipeline kế thừa từ trạng thái đã kiểm định cùng commit `df48d66`.
 
 ---
 
@@ -78,4 +78,4 @@ Nhánh: `feature/initial-import` → mở PR vào `main`.
 - [x] Test đã pass (cổng cơ học + logic)
 - [x] `.env.example` đầy đủ, `.env` KHÔNG bị commit
 - [x] Conventional Commits
-- [ ] Git remote + quyền push: **CHỜ** — repo chưa có remote, đang chờ URL từ user
+- [~] Git remote + quyền push: remote đã cấu hình (`origin` → github.com/koitran14/test-repo-commit), nhưng push **từ máy đang bị chặn** (egress proxy trả 403) → cần user push hoặc cấp quyền/kênh push.
