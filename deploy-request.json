@@ -1,0 +1,67 @@
+{
+  "request_id": "dd43a9c6-e12c-4a1e-8527-154e64c8f9df",
+  "requested_by": "dangkhoi.tran@pmax.com.vn",
+  "mode": "apply",
+  "confirmed": true,
+  "mr_context": {
+    "iid": 2,
+    "url": "https://github.com/koitran14/test-repo-commit/pull/2",
+    "status": "open"
+  },
+  "project": {
+    "name": "quotation-agent",
+    "environment": "staging",
+    "tags": {
+      "team": "backend",
+      "app": "quotation-agent"
+    }
+  },
+  "github": {
+    "api_url": "https://api.github.com",
+    "owner": "koitran14",
+    "repo": "test-repo-commit",
+    "visibility": "private",
+    "description": "Quotation Agent — nhận email [Quotation], trích xuất báo giá, ghi Google Sheet, tự trả lời",
+    "default_branch": "main",
+    "initialize_with_readme": false
+  },
+  "aws": {
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1a"
+  },
+  "secrets": {
+    "secret_name": "quotation-agent-staging",
+    "env_vars": {
+      "NODE_ENV": "production",
+      "PORT": "3100",
+      "DASHBOARD_BASE_URL": "REPLACE_WITH_STAGING_URL"
+    },
+    "secret_keys": [
+      "ANTHROPIC_API_KEY",
+      "GOOGLE_OAUTH_CLIENT_ID",
+      "GOOGLE_OAUTH_CLIENT_SECRET",
+      "GOOGLE_OAUTH_REFRESH_TOKEN",
+      "GOOGLE_LOGIN_CLIENT_ID",
+      "GOOGLE_LOGIN_CLIENT_SECRET",
+      "DASHBOARD_SESSION_SECRET"
+    ],
+    "sync_db_credentials": false
+  },
+  "lightsail": {
+    "instance": {
+      "blueprint_id": "ubuntu_22_04",
+      "key_pair_name": "quotation-agent",
+      "ram_setting": "2"
+    },
+    "database": null,
+    "sizing": {
+      "sizing_basis": "estimated-static",
+      "peak_rss_mb": null,
+      "sustained_rss_mb": null,
+      "headroom": 1.5,
+      "fixtures_ref": "test/load/drive.js",
+      "measured_at": null,
+      "env_image": null
+    }
+  }
+}
